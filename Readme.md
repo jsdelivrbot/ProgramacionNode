@@ -19,3 +19,5 @@ Luego ingrese a Visual Studio Code e inicialice el repositorio
 en la carpeta que se sincronizó desde github.
 
 Ya puede ingresar archivos, escribir, confirmar cambios y sincronizar el proyecto.
+
+Buscar cómo inicializar
