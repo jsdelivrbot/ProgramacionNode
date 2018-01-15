@@ -1,0 +1,40 @@
+<%- include('header') %>
+
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div class="eight wide column">
+    <form class="ui form segment" method="post" enctype="multipart/form-data">
+      <div class="field required">
+        <label>Nombre</label>
+        <input placeholder="Nombre" type="text" name="name">
+      </div>
+      <div class="field required">
+        <label>Contrasena</label>
+        <input placeholder="Contrasena" type="password" name="password">
+      </div>
+      <div class="field required">
+        <label>Contrasena</label>
+        <input placeholder="Contrasena" type="password" name="repassword">
+      </div>
+      <div class="field required">
+        <label>Genero</label>
+        <select class="ui compact selection dropdown" name="gender">
+          <option value="m">M</option>
+          <option value="f">F</option>
+          <option value="x">X</option>
+        </select>
+      </div>
+      <div class="field required">
+        <label>Avatar</label>
+        <input type="file" name="avatar">
+      </div>
+      <div class="field required">
+        <label>Biografia</label>
+        <textarea name="bio" rows="5"></textarea>
+      </div>
+      <input type="submit" class="ui button fluid" value="注册">
+    </form>
+  </div>
+</div>
+
+<%- include('footer') %>
