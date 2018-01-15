@@ -104,7 +104,7 @@ exports.findOrCreate = function(profile) {
     return exports.find(profile.username)
     .then(user => {
         if (user) return user;
-        //else
+        // else
         return exports.create(profile.id, null, profile.provider,
                        profile.name.familyName, profile.name.givenName, profile.name.middleName,
                        profile.emails, profile.photos);

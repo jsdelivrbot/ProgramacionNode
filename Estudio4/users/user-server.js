@@ -6,7 +6,7 @@ const util    = require('util');
 const log   = require('debug')('users:server');
 const error = require('debug')('users:error');
 
-const usersModelfromUsers = require('./users-sequelize');
+const usersModel = require('./users-sequelize');
 
 var server = restify.createServer({
     name: "User-Auth-Service",
@@ -22,7 +22,7 @@ server.use(restify.bodyParser({
 
 // Create a user record
 server.post('/create-user', (req, res, next) => {
-    usersModelfromUsers.create(req.params.username, req.params.password,  req.params.provider,
+    usersModel.create(req.params.username, req.params.password,  req.params.provider,
                       req.params.familyName, req.params.givenName, req.params.middleName,
                       req.params.emails,   req.params.photos)
     .then(result => {
@@ -35,7 +35,7 @@ server.post('/create-user', (req, res, next) => {
 
 // Update an existing user record
 server.post('/update-user/:username', (req, res, next) => {
-    usersModelfromUsers.update(req.params.username, req.params.password,  req.params.provider,
+    usersModel.update(req.params.username, req.params.password,  req.params.provider,
                       req.params.familyName, req.params.givenName, req.params.middleName,
                       req.params.emails,   req.params.photos)
     .then(foo => {
@@ -49,7 +49,7 @@ server.post('/update-user/:username', (req, res, next) => {
 // Find a user, if not found create one given profile information
 server.post('/find-or-create', (req, res, next) => {
     log('find-or-create '+ util.inspect(req.params));
-    usersModelfromUsers.findOrCreate({
+    usersModel.findOrCreate({
         id: req.params.username, username: req.params.username,
         password: req.params.password, provider: req.params.provider,
         familyName: req.params.familyName, givenName: req.params.givenName,
@@ -66,7 +66,7 @@ server.post('/find-or-create', (req, res, next) => {
 
 // Find the user data (does not return password)
 server.get('/find/:username', (req, res, next) => {
-    usersModelfromUsers.find(req.params.username).then(user => {
+    usersModel.find(req.params.username).then(user => {
         if (!user) {
             res.send(404, new Error("Did not find "+ req.params.username));
         } else {
@@ -79,21 +79,21 @@ server.get('/find/:username', (req, res, next) => {
 
 // Delete/destroy a user record
 server.del('/destroy/:username', (req, res, next) => {
-    usersModelfromUsers.destroy(req.params.username)
+    usersModel.destroy(req.params.username)
     .then(() => { res.send({}); next(false); } )
     .catch(err => { res.send(500, err); error(err.stack); next(false); });
 });
 
 // Check password
 server.post('/passwordCheck', (req, res, next) => {
-    usersModelfromUsers.userPasswordCheck2(req.params.username, req.params.password)
+    usersModel.userPasswordCheck(req.params.username, req.params.password)
     .then(check => { res.send(check); next(false); })
     .catch(err => { res.send(500, err); error(err.stack); next(false); });
 });
 
 // List users
 server.get('/list', (req, res, next) => {
-    usersModelfromUsers.listUsers().then(userlist => {
+    usersModel.listUsers().then(userlist => {
         if (!userlist) userlist = [];
         log(util.inspect(userlist));
         res.send(userlist);

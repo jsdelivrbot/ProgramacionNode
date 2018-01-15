@@ -16,7 +16,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
 
 const usersModel = require(process.env.USERS_MODEL ? path.join('..', process.env.USERS_MODEL) : '../models/users-rest');
-//const usersModel = require('../models/users-rest');
 
 exports.initPassport = function(app) {
   app.use(passport.initialize());
@@ -51,6 +50,7 @@ router.post('/login',
 router.get('/login/fail', function(req, res, next) {
   res.send('Failed to authenticate');
 });
+
 router.get('/login/success', function(req, res, next) {
   res.send('Successfully authenticated');
 }); */

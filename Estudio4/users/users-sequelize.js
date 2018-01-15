@@ -98,12 +98,12 @@ exports.find = function(username) {
     .then(user => user ? exports.sanitizedUser(user) : undefined);
 };
 
-exports.userPasswordCheck2 = function(username, password) {
+exports.userPasswordCheck = function(username, password) {
     return exports.connectDB().then(SQUser => {
         return SQUser.find({ where: { username: username } })
     })
     .then(user => {
-        log('userPasswordCheck2 query= '+ username +' '+ password +' user= '+ user.username +' '+ user.password);
+        log('userPasswordCheck query= '+ username +' '+ password +' user= '+ user.username +' '+ user.password);
         if (!user) {
             return { check: false, username: username, message: "Could not find user" };
         } else if (user.username === username && user.password === password) {
