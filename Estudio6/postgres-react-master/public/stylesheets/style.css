@@ -1,0 +1,30 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.delete-btn {
+	margin-left: 10px;
+}
+
+.new-todo:hover {
+	background-color: #ADD8E6;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.form-control.todoInput {
+	width: 40%;
+}
+
+.todo-item {
+	max-width: 700px;
+}
+
+.empty-todo {
+	text-align: center;
+}
