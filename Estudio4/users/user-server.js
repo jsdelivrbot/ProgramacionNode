@@ -88,7 +88,7 @@ server.del('/destroy/:username', (req, res, next) => {
 server.post('/passwordCheck', (req, res, next) => {
     usersModel.userPasswordCheck(req.params.username, req.params.password)
     .then(check => { res.send(check); next(false); })
-    .catch(err => { res.send(500, err); error(err.stack); next(false); });
+    //.catch(err => { res.send(500, err); error(err.stack); next(false); });
 });
 
 // List users
